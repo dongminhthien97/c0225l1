@@ -8,9 +8,47 @@
 </head>
 
 <body>
+  <form>
+    <label><strong>Amount</strong></label>
+    <br>
+    <input id="Amount">
+    <br>
+    <label><Strong>From Currency</Strong></label>
+    <select id="From">
+      <option value="VND">VietNam</option>
+      <option value="USD">DolaMy</option>
+    </select>
+    <br>
+    <label><Strong>To Currency</Strong></label>
+    <select id="To">
+      <option value="VND">VietNam</option>
+      <option value="USD">DolaMy</option>
+    </select>
+    <br>
+    <button onclick="Exchangemoney()">Convert</button>
+  </form>
+
+  <p id="Result"></p>
   <script>
-    let dollar = +prompt("Nhap so tien usd");
-    alert("so tien vnd la:" + dollar * 23000);
+    function Exchangemoney() {
+      let amount = document.getElementById("Amount").value;
+      let from = document.getElementById("From").value;
+      let to = document.getElementById("To").value;
+      let result;
+
+      if (from == "USD" && to == "VND") {
+        result = "Result: " + (amount * 23000) + " VND";
+      }
+      else if (from == "VND" && to == "USD") {
+        result = "Result: " + (amount / 23000) + " USD";
+      }
+      else if (from == "VND") {
+        result = "Result: " + amount + " VND"
+      } else {
+        result = "Result: " + amount + " USD"
+      }
+      document.writeln(result) = result;
+    }
   </script>
 </body>
 
