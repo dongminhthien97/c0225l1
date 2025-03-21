@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Caculator</title>
+</head>
+
+<body>
+  <h2>Caculator</h2>
+  <input type="number" id="num1">
+  <input type="number" id="num2">
+  <br>
+  <button onclick="calculate('+')">Addition(+)</button>
+  <button onclick="calculate('-')">Subtraction(-)</button>
+  <button onclick="calculate('*')">Multiplication(X)</button>
+  <button onclick="calculate('/')">Division(/)</button>
+  <p id="result"></p>
+  <script>
+    function calculate(operator) {
+      let num1 = parseFloat(document.getElementById('num1').value);
+      let num2 = parseFloat(document.getElementById('num2').value);
+      let resultText = 'Result ';
+
+      if (isNaN(num1) || isNaN(num2)) {
+        document.getElementById('result').innerText = "Vui lòng nhập số";
+        return;
+      }
+
+      switch (operator) {
+        case '+': resultText += "Addition : " + (num1 + num2);
+          break;
+        case '-': resultText += "Subtraction : " + (num1 - num2);
+          break;
+        case '*': resultText += "Multiplication : " + (num1 * num2);
+          break;
+        case '/':
+          if (num2 === 0) {
+            resultText = "Lỗi: Không thể chia cho 0";
+          } else {
+            resultText += "Division : " + (num1 / num2);
+          }
+          break;
+      }
+      document.getElementById('result').innerText = resultText;
+    }
+
+  </script>
+</body>
+
+</html>
