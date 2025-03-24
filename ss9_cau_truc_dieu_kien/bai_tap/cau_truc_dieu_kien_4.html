@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cấu trúc điều kiện 4</title>
+</head>
+
+<body>
+  <p id=result></p>
+  <script>
+    let resultText = "";
+    let num1 = prompt("Nhap so nguyen a");
+    let num2 = prompt("Nhap so nguyen b");
+    let num3 = prompt("Nhap so nguyen c");
+    if (num1 > num2) {
+      if (num1 > num3) {
+        resultText = "Số lớn nhất là: " + num1;
+      } else {
+        resultText = "Số lớn nhất là: " + num2;
+      }
+    } else if (num2 > num3) {
+      resultText = "Số lớn nhất là: " + num3;
+    } else {
+      resultText = "Số lớn nhất là: " + num3;
+    }
+    document.getElementById("result").innerText = resultText;
+  </script>
+
+</body>
+
+</html>
