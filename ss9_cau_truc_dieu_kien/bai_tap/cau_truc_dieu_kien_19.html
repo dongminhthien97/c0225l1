@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cau truc dieu kien 19</title>
+</head>
+
+<body>
+  <h2>Tính Lãi Ngân Hàng</h2>
+  <p>Nhập số tiền ban đầu, số tháng gửi và lãi suất hàng tháng</p>
+  <input type="number" id="principal">
+  <br>
+  <input type="number" id="months">
+  <br>
+  <input type="number" id="rate">
+  <br>
+  <button onclick="calculateInterest()">Tính Lãi</button>
+  <h3 id="result"></h3>
+
+  <script>
+    function calculateInterest() {
+      let principal = parseFloat(document.getElementById("principal").value);
+      let months = parseInt(document.getElementById("months").value);
+      let rate = parseFloat(document.getElementById("rate").value) / 100;
+
+      if (isNaN(principal) || principal <= 0 || isNaN(months) || months <= 0 || isNaN(rate) || rate <= 0) {
+        document.getElementById("result").innerText = "Vui lòng nhập giá trị hợp lệ!";
+        return;
+      }
+
+      let totalAmount = principal * Math.pow(1 + rate, months);
+      let interest = totalAmount - principal;
+
+      document.getElementById("result").innerText = "Tổng tiền sau " + months + " tháng: " + totalAmount.toFixed(2) + " VND\nLãi suất nhận được: " + interest.toFixed(2) + " VND";
+    }
+  </script>
+</body>
+
+</html>
