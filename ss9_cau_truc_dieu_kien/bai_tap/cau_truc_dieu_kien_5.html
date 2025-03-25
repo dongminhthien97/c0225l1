@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cau truc dieu kien 5</title>
+</head>
+
+<body>
+  <h2>Xếp Loại Học Lực</h2>
+  <input type="number" id="testScore"><br>
+  <input type="number" id="midtermScore"><br>
+  <input type="number" id="finalScore"><br>
+  <button onclick="calculateGrade()">Xếp Loại</button>
+  <h3 id="result"></h3>
+
+  <script>
+    function calculateGrade() {
+      let testScore = parseFloat(document.getElementById("testScore").value);
+      let midtermScore = parseFloat(document.getElementById("midtermScore").value);
+      let finalScore = parseFloat(document.getElementById("finalScore").value);
+
+      if (isNaN(testScore) || isNaN(midtermScore) || isNaN(finalScore)) {
+        document.getElementById("result").innerText = "Vui lòng nhập đầy đủ điểm số!";
+        return;
+      }
+
+      let average = (testScore + midtermScore + finalScore) / 3;
+      let grade;
+
+      if (average >= 9) {
+        grade = "Giỏi";
+      } else if (average >= 7) {
+        grade = "Khá";
+      } else if (average >= 6) {
+        grade = "Trung Bình";
+      } else {
+        grade = "Yếu";
+      }
+      document.getElementById("result").innerText = "Xếp loại: " + grade;
+    }
+  </script>
+</body>
+
+</html>
