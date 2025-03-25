@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cau truc dieu kien 8</title>
+</head>
+
+<body>
+  <h2>Chuyển Đổi Nhiệt Độ</h2>
+  <input type="number" id="cel"><br>
+  <button onclick="Convert()">Chuyển đổi</button>
+  <p id="result"></p>
+  </div>
+
+  <script>
+    function Convert() {
+      let cel = parseFloat(document.getElementById("cel").value);
+
+      if (isNaN(cel)) {
+        document.getElementById("result").innerText = "Vui lòng nhập số hợp lệ!";
+        return;
+      }
+
+      let f = (cel * 9 / 5) + 32;
+      document.getElementById("result").innerText = cel + "°C = " + f.toFixed(2) + "°F";
+    }
+  </script>
+</body>
+
+</html>
