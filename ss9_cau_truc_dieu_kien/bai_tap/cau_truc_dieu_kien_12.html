@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cau truc dieu kien 12</title>
+</head>
+
+<body>
+  <h2>Tính Diện Tích Tam Giác Vuông</h2>
+  <input type="number" id="base"><br>
+  <input type="number" id="height"><br>
+  <button onclick="calculateArea()">Tính Diện Tích</button>
+  <h3 id="result"></h3>
+  </div>
+
+  <script>
+    function calculateArea() {
+      let base = parseFloat(document.getElementById("base").value);
+      let height = parseFloat(document.getElementById("height").value);
+
+      if (isNaN(base) || isNaN(height) || base <= 0 || height <= 0) {
+        document.getElementById("result").innerText = "Vui lòng nhập số hợp lệ!";
+        return;
+      }
+
+      let area = (base * height) / 2;
+      document.getElementById("result").innerText = "Diện tích tam giác vuông: " + area.toFixed(2) + " m²";
+    }
+  </script>
+</body>
+
+</html>
