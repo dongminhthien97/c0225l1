@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>Tính Cước Điện Thoại</h2>
+  <label>Số phút gọi</label>
+  <input type="number" id="callMinutes">
+  <br>
+  <label>Cước phí</label>
+  <input type="number" id="callRate">
+  <br>
+  <label>
+    <input type="checkbox" id="isOutOfNetwork"> Gọi ngoài mạng
+  </label><br>
+  <button onclick="calculatePhoneBill()">Tính Cước</button>
+  <p id="result"></p>
+  </div>
+
+  <script>
+    function calculatePhoneBill() {
+      let callMinutes = parseFloat(document.getElementById("callMinutes").value);
+      let callRate = parseFloat(document.getElementById("callRate").value);
+      let isOutOfNetwork = document.getElementById("isOutOfNetwork").checked;
+
+      if (isNaN(callMinutes) || isNaN(callRate) || callMinutes < 0 || callRate < 0) {
+        document.getElementById("result").innerText = "Vui lòng nhập số hợp lệ!";
+        return;
+      }
+
+      let totalCost = callMinutes * callRate;
+
+      if (isOutOfNetwork) {
+        totalCost += callMinutes * 500; // Phí gọi ngoài mạng 500 VNĐ/phút
+      }
+
+      document.getElementById("result").innerText = "Cước điện thoại: " + totalCost + " VNĐ";
+    }
+  </script>
+</body>
+
+</html>
