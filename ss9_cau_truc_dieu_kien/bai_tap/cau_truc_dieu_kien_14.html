@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>Giải Phương Trình Bậc 2</h2>
+  <p>Dạng: ax² + bx + c = 0</p>
+  <input type="number" id="a">
+  <br>
+  <input type="number" id="b">
+  <br>
+  <input type="number" id="c">
+  <br>
+  <button onclick="solve()">Giải Phương Trình</button>
+  <h3 id="result"></h3>
+
+  <script>
+    function solve() {
+      let a = parseFloat(document.getElementById("a").value);
+      let b = parseFloat(document.getElementById("b").value);
+      let c = parseFloat(document.getElementById("c").value);
+
+      if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        document.getElementById("result").innerText = "Vui lòng nhập số hợp lệ!";
+        return;
+      }
+
+      if (a === 0) {
+        if (b === 0) {
+          document.getElementById("result").innerText = c === 0 ? "Phương trình có vô số nghiệm." : "Phương trình vô nghiệm.";
+        } else {
+          let x = -c / b;
+          document.getElementById("result").innerText = "Nghiệm của phương trình: x = " + x.toFixed(2);
+        }
+        return;
+      }
+
+      let delta = b * b - 4 * a * c;
+      if (delta < 0) {
+        document.getElementById("result").innerText = "Phương trình vô nghiệm.";
+      } else if (delta === 0) {
+        let x = -b / (2 * a);
+        document.getElementById("result").innerText = "Phương trình có nghiệm kép: x = " + x.toFixed(2);
+      } else {
+        let x1 = (-b + Math.sqrt(delta)) / (2 * a);
+        let x2 = (-b - Math.sqrt(delta)) / (2 * a);
+        document.getElementById("result").innerText = "Phương trình có hai nghiệm: x1 = " + x1.toFixed(2) + ", x2 = " + x2.toFixed(2);
+      }
+    }
+  </script>
+</body>
+
+</html>
