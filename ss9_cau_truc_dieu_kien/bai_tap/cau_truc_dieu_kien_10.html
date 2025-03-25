@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cau truc dieu kien 10</title>
+</head>
+
+<body>
+  <h2>Tính Diện Tích Hình Vuông</h2>
+  <input type="number" id="side"><label>meter</label>
+  <br>
+  <button onclick="calculateArea()">Tính Diện Tích</button>
+  <p id="result"></p>
+
+  <script>
+    function calculateArea() {
+      let side = parseFloat(document.getElementById("side").value);
+
+      if (isNaN(side) || side <= 0) {
+        document.getElementById("result").innerText = "Vui lòng nhập số hợp lệ!";
+        return;
+      }
+
+      let area = side * side;
+      document.getElementById("result").innerText = "Diện tích hình vuông: " + area.toFixed(2) + " m²";
+    }
+  </script>
+</body>
+
+</html>
