@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>Tính Giá Điện Cho Hộ Gia Đình</h2>
+  <p>Nhập số kWh tiêu thụ để tính tiền điện</p>
+  <input type="number" id="kwh">
+  <br>
+  <button onclick="calculateElectricityBill()">Tính Tiền</button>
+  <h3 id="result"></h3>
+  </div>
+
+  <script>
+    function calculateElectricityBill() {
+      let kwh = parseFloat(document.getElementById("kwh").value);
+      let cost = 0;
+
+      if (isNaN(kwh) || kwh <= 0) {
+        document.getElementById("result").innerText = "Vui lòng nhập số kWh hợp lệ!";
+        return;
+      }
+      // Bậc 1: Mức sử dụng từ 0 - 50kWh: 1.893đ/kWh.
+      // Bậc 2: Mức sử dụng từ 51 - 100kWh: 1.956đ/kWh.
+      // Bậc 3: Mức sử dụng từ 101 - 200kWh: 2.271đ/kWh.
+      // Bậc 4: Mức sử dụng từ 201 - 300kWh: 2.860đ/kWh.
+      // Bậc 5: Mức sử dụng từ 301 - 400kWh: 3.197đ/kWh.
+      // Bậc 6: Mức sử dụng từ 401Wh trở lên: 3.302đ/kWh.
+      if (kwh <= 50) {
+        cost = kwh * 1.893;
+      } else if (kwh <= 100) {
+        cost = 50 * 1.893 + (kwh - 50) * 1.956;
+      } else if (kwh <= 200) {
+        cost = 50 * 1.893 + 50 * 1.956 + (kwh - 100) * 2.271;
+      } else if (kwh <= 300) {
+        cost = 50 * 1.893 + 50 * 1.956 + 100 * 2.271 + (kwh - 200) * 2.860;
+      } else if (kwh <= 400) {
+        cost = 50 * 1.893 + 50 * 1.956 + 100 * 2.271 + 100 * 2.860 + (kwh - 300) * 3.197;
+      } else {
+        cost = 50 * 1.893 + 50 * 1.956 + 100 * 2.271 + 100 * 2.860 + 100 * 3.197 + (kwh - 400) * 3.302;
+      }
+
+      document.getElementById("result").innerText = "Tổng tiền điện: " + cost.toFixed(2) + " VND";
+    }
+  </script>
+</body>
+
+</html>
