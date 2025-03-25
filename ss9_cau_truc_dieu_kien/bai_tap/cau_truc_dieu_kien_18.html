@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <h2>Tính Thuế Thu Nhập Cá Nhân Theo Năm</h2>
+  <p>Nhập thu nhập chịu thuế để tính thuế</p>
+  <input type="number" id="income"><br>
+  <button onclick="calculateTax()">Tính Thuế</button>
+  <h3 id="result"></h3>
+  </div>
+
+  <script>
+    function calculateTax() {
+      let income = parseFloat(document.getElementById("income").value);
+      let tax = 0;
+
+      if (isNaN(income) || income <= 0) {
+        document.getElementById("result").innerText = "Vui lòng nhập thu nhập hợp lệ!";
+        return;
+      }
+
+      if (income <= 60000000) {
+        tax = income * 0.05;
+      } else if (income <= 120000000) {
+        tax = 60000000 * 0.05 + (income - 60000000) * 0.1;
+      } else if (income <= 216000000) {
+        tax = 60000000 * 0.05 + 60000000 * 0.1 + (income - 120000000) * 0.15;
+      } else if (income <= 384000000) {
+        tax = 60000000 * 0.05 + 60000000 * 0.1 + 96000000 * 0.15 + (income - 216000000) * 0.2;
+      } else if (income <= 624000000) {
+        tax = 60000000 * 0.05 + 60000000 * 0.1 + 96000000 * 0.15 + 168000000 * 0.2 + (income - 384000000) * 0.25;
+      } else if (income <= 960000000) {
+        tax = 60000000 * 0.05 + 60000000 * 0.1 + 96000000 * 0.15 + 168000000 * 0.2 + 240000000 * 0.25 + (income - 624000000) * 0.3;
+      } else {
+        tax = 60000000 * 0.05 + 60000000 * 0.1 + 96000000 * 0.15 + 168000000 * 0.2 + 240000000 * 0.25 + 336000000 * 0.3 + (income - 960000000) * 0.35;
+      }
+
+      document.getElementById("result").innerText = "Thuế thu nhập cá nhân: " + tax.toFixed(2) + " VND";
+    }
+  </script>
+</body>
+
+</html>
