@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>cau truc dieu kien 6</title>
+</head>
+
+<body>
+  <h2>Tính Hoa Hồng</h2>
+  <input type="number" id="sales"><br>
+  <button onclick="calculateCommission()">Tính Hoa Hồng</button>
+  <h3 id="result"></h3>
+  </div>
+
+  <script>
+    function calculateCommission() {
+      let sales = parseFloat(document.getElementById("sales").value);
+
+      if (isNaN(sales) || sales < 0) {
+        document.getElementById("result").innerText = "Vui lòng nhập số hợp lệ!";
+        return;
+      }
+
+      let commissionRate;
+
+      if (sales < 100000000) {
+        commissionRate = 0.02;
+      } else if (sales < 200000000) {
+        commissionRate = 0.05;
+      } else if (sales < 300000000) {
+        commissionRate = 0.1;
+      } else {
+        commissionRate = 0.2;
+      }
+
+      let commission = sales * commissionRate;
+      document.getElementById("result").innerText = "Hoa hồng nhận được: " + commission + " VNĐ";
+    }
+  </script>
+</body>
+
+</html>
