@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chèn dấu "-" giữa các số chẵn</title>
+</head>
+
+<body>
+  <script>
+    function chendauvaogiuacacsochan(input) {
+      return input.split('').map((num, index, arr) => {
+        if (num % 2 === 0 && arr[index + 1] % 2 === 0) {
+          return num + '-';
+        }
+        return num;
+      }).join('');
+    }
+
+    let input = "025468";
+    document.writeln(chendauvaogiuacacsochan(input));
+
+  </script>
+</body>
+
+</html>
