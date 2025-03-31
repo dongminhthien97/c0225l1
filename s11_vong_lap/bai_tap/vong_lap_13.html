@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function tinhLaiKep(P, r, n) {
+      let A = P * Math.pow((1 + r), n);
+      return A.toFixed(2);
+    }
+
+    let soTienBanDau = 10000000;
+    let laiSuatHangThang = 0.005;
+    let soThang = 12;
+
+    let tongTien = tinhLaiKep(soTienBanDau, laiSuatHangThang, soThang);
+    document.writeln(`Số tiền sau ${soThang} tháng: ${tongTien} VND`);
+  </script>
+</body>
+
+</html>
