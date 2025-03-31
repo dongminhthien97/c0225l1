@@ -9,12 +9,45 @@
 
 <body>
   <script>
-    for (i = 0; i <= 5; i++) {
-      //tao rows
-      for (j = 0; j < i; j++)
-        document.writeln("*");
-      document.writeln("<br>")
+    function rightTriangle1(n) {
+      for (let i = 1; i <= n; i++) {
+        document.writeln('*'.repeat(i) + "<br>");
+      }
+
     }
+
+    function rightTriangle2(n) {
+      for (let i = n; i >= 1; i--) {
+        document.writeln('*'.repeat(i) + "<br>");
+      }
+    }
+
+    function rightTriangle3(n) {
+      for (let i = 1; i <= n; i++) {
+        document.writeln(' '.repeat(n - i) + '*'.repeat(i) + "<br>");
+      }
+    }
+
+    function rightTriangle4(n) {
+      for (let i = n; i >= 1; i--) {
+        document.writeln(' '.repeat(n - i) + '*'.repeat(i) + "<br>");
+      }
+    }
+
+    let size = 6;
+
+    console.log("Góc vuông ở trên-trái:");
+    rightTriangle2(size);
+
+    console.log("\nGóc vuông ở trên-phải:");
+    rightTriangle4(size);
+
+    console.log("\nGóc vuông ở dưới-trái:");
+    rightTriangle1(size);
+
+    console.log("\nGóc vuông ở dưới-phải:");
+    rightTriangle3(size);
+
   </script>
 </body>
 
