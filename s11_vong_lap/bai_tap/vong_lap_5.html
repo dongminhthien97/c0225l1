@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>vong lap 5</title>
+</head>
+
+<body>
+  <script>
+    function sumFibonacci(n) {
+      let a = 0, b = 1, sum = a + b;
+
+      for (let i = 2; i < n; i++) {
+        let next = a + b;
+        sum += next;
+        a = b;
+        b = next;
+      }
+
+      return sum;
+    }
+
+    document.writeln("Tong cua 20 so fibonacci dau tien la: " + sumFibonacci(20));
+  </script>
+</body>
+
+</html>
