@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <input id="num1">
+  <input id="num2">
+  <button onclick="tinh_tong()">Tinhtong</button>
+  <script>
+    function tinh_tong(a, b) {
+      a = parseFloat(document.getElementById("num1").value);
+      b = parseFloat(document.getElementById("num2").value);
+
+      let result = a + b;
+
+      if (isNaN(a) || isNaN(b)) {
+        alert("Error");
+      } else if (a > b) {
+        alert("vui long nhap lai");
+      } else {
+        alert(result);
+      }
+    }
+  </script>
+</body>
+
+</html>
