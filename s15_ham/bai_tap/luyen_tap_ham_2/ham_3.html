@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tính giai thừa</title>
+</head>
+
+<body>
+  <script>
+    var n = prompt('Nhap gia tri cua N');
+    var gt = 0;
+    function giaithua(x) {
+      var giaithua = 1;
+      for (var i = 1; i <= n; i++) {
+        giaithua *= i;
+      }
+      alert('Giai Thua bang ' + giaithua);
+    }
+    var n = giaithua(n);
+  </script>
+
+</body>
+
+</html>
