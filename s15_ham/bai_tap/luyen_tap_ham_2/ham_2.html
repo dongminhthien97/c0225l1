@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tính diện tích và chu vi hình tròn</title>
+</head>
+
+<body>
+  <h3>Tính chu vi - diện tích hình tròn</h3>
+  <p>Nhập bán kính hình tròn: <input type="number" id="radius" value="0" /></p>
+  <button onclick="tan()">tinhtoan</button>
+  <p id="result1"></p>
+  <p id="result2"></p>
+  <script>
+    function tan() {
+      var r = document.getElementById("radius").value;
+      var result1 = 2 * 3.14 * r;
+      document.getElementById("result1").innerText = "Chu vi " + result1;
+
+      var result2 = 3.14 * r * r;
+      document.getElementById('result2').innerText = "Diện tích " + result2;
+    }
+
+  </script>
+</body>
+
+</html>
