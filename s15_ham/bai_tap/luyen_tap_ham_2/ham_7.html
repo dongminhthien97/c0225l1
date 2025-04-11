@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đổi chỗ hai số nguyên</title>
+</head>
+
+<body>
+  <script>
+    function doiCho(a, b) {
+      return [b, a];
+    }
+    let so1 = parseInt(prompt("Nhap so nguyen so 1"));
+    let so2 = parseInt(prompt("Nhap so nguyen so 2"));
+    [so1, so2] = doiCho(so1, so2);
+    alert([so1, so2]);
+  </script>
+</body>
+
+</html>
