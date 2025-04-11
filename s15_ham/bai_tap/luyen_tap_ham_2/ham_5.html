@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tìm số nguyên nhỏ nhất</title>
+</head>
+
+<body>
+  <script>
+    function timSoNhoNhat(a, b, c) {
+      let nhoNhat = a;
+      if (b < nhoNhat) {
+        nhoNhat = b;
+      }
+      if (c < nhoNhat) {
+        nhoNhat = c;
+      }
+      return nhoNhat;
+    }
+    let so1 = parseInt(prompt("Nhap so nguyen so 1"));
+    let so2 = parseInt(prompt("Nhap so nguyen so 2"));
+    let so3 = parseInt(prompt("Nhap so nguyen so 3"));
+
+    let ketQua = timSoNhoNhat(so1, so2, so3);
+    alert("số nguyên nhỏ nhất: " + ketQua);
+  </script>
+</body>
+
+</html>
