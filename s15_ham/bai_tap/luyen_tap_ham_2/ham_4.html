@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiểm tra ký tự số</title>
+</head>
+
+<body>
+  <input id="val" placeholder="Nhập ký tự bất kỳ">
+  <button onclick="isNumber()">Check</button>
+  <p id="result"></p>
+  <script>
+    function isNumber() {
+      let num = document.getElementById("val").value;
+      if (!isNaN(num)) {
+        document.getElementById("result").innerText = "Đây là ký tự số";
+      } else {
+        document.getElementById("result").innerText = "Đây không phải là ký tự số";
+      }
+    }
+  </script>
+</body>
+
+</html>
