@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Xây dựng lớp mô tả Temperature</title>
+</head>
+
+<body>
+  <script>
+    class Temperature {
+      celcius;
+      constructor(celcius) {
+        this.celcius = celcius;
+      }
+      getCelcius() {
+        return this.celcius;
+      }
+      setCelcius(celcius) {
+        this.celcius = celcius;
+      }
+      getFahrenheit() {
+        return this.celcius * 1.8 + 32;
+      }
+      getKelvin() {
+        return this.celcius + 273.15;
+      }
+    }
+    let myTemperature = new Temperature(25);
+    let celcius = myTemperature.getCelcius();
+
+    let fahrenheit = myTemperature.getFahrenheit();
+    let kelvin = myTemperature.getKelvin();
+    document.writeln("25 độ C tương ứng với " + fahrenheit + " độ F" + "<br>");
+    document.writeln("25 độ C tương ứng với " + kelvin + " độ K");
+
+  </script>
+</body>
+
+</html>
