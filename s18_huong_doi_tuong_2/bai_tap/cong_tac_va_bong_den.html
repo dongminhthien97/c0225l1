@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Công tắc và bóng đèn</title>
+</head>
+
+<body>
+  <script>
+    class ElectricLamp {
+      constructor(status) {
+        this.status = status; //false la dang tat, true la dang bat
+      }
+      turnOff() {
+        this.status = false;
+        console.log("Bóng đèn đang tắt");
+      }
+      turnOn() {
+        this.status = true;
+        console.log("Bóng đèn đang bật");
+      }
+    }
+    class SwitchButton {
+      constructor(status, lamp) {
+        this.status = status;
+        this.lamp = lamp;
+      }
+      connectToLamp(ElectricLamp) {
+        return this.lamp = ElectricLamp;
+      }
+      switchOff() {
+        if (this.lamp) {
+          this.status = false;
+          this.lamp.turnOff();
+        }
+      }
+      switchOn() {
+        if (this.lamp) {
+          this.status = true;
+          this.lamp.turnOn();
+        }
+      }
+    }
+
+    let lamp = new ElectricLamp(false);
+
+    let button = new SwitchButton(lamp, false);
+
+    button.connectToLamp(lamp); //Ket noi bong den va cong tac
+
+    //Lặp 10 lần bật/tắt công tắc
+    let count = 0;
+    for (count = 0; count <= 10; count++) {
+      button.switchOn();
+      button.switchOff();
+      count += 1;
+    }
+  </script>
+</body>
+
+</html>
