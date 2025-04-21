@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kiểm tra một ký tự</title>
+</head>
+
+<body>
+  <h1>Kiểm tra ký tự</h1>
+  <input id="char" placeholder="Chỉ nhập một ký tự">
+  <button onclick="checkChar()">Check</button>
+  <p id="result"></p>
+
+  <script>
+    function checkChar(character) {
+      character = document.getElementById("char").value;
+      let result;
+
+      switch (character) {
+        case 'a': case 'A':
+          result = ' Đây ký tự nguyên âm';
+          break;
+        case 'o': case "O":
+          result = ' Đây ký tự nguyên âm';
+          break;
+        case 'u': case "U":
+          result = ' Đây ký tự nguyên âm';
+          break;
+        case 'i': case 'I':
+          result = ' Đây ký tự nguyên âm';
+          break;
+        case 'e': case 'E':
+          result = ' Đây ký tự nguyên âm';
+          break;
+        default:
+          result = 'Đây không phải ký tự nguyên âm';
+      }
+      document.getElementById('result').innerText = result;
+    }
+  </script>
+</body>
+
+</html>

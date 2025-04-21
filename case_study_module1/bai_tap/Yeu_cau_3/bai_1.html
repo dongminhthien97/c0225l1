@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mảng và Loop</title>
+</head>
+
+<body>
+  <script>
+    function preFixSum(a) {
+      let result = [];
+      let sum = 0;
+      for (let i = 0; i <= a.length; i++) {
+        sum += a[i];
+        result.push(sum);
+      }
+    }
+    let a = [1, 2, 3];
+    let b = preFixSum(a);
+    document.write(b);
+  </script>
+</body>
+
+</html>

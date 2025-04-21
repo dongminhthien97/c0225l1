@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tính lương nhân viên</title>
+</head>
+
+<body>
+  <h3>Tool tính lương sau thuế</h3>
+  <input id="money" type="number" placeholder="Nhập lương">
+  <button onclick="salaryEarn()">Check</button>
+  <p id="result"></p>
+
+  <script>
+    function salaryEarn() {
+      let num = parseInt(document.getElementById("money").value);
+      let result = '';
+
+      if (isNaN(num) || num <= 0) {
+        document.getElementById("result").innerText = "Error";
+        return;
+      }
+
+      if (num >= 15000000) {
+        result = num - (num * 0.2);
+      } else if (7000000 <= num <= 15000000) {
+        result = num - (num * 0.1);
+      } else {
+        result = num - (num * 0.05);
+      }
+      document.getElementById("result").innerText = 'Số tiền lương thực nhận là: ' + result;
+    }
+  </script>
+</body>
+
+</html>
