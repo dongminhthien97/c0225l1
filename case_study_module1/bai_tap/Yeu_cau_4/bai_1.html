@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String</title>
+</head>
+
+<body>
+  <script>
+    function chuanHoaXau(str) {
+      return str
+        .trim()
+        .replace(/\+s/g, ' ')
+        .split(' ')
+        .map(word =>
+          word.charAt(0).toUpperCase() + word.slice(1).toLowerCase()
+        )
+        .join(' ');
+    }
+
+    function timTuDaiNhat(str) {
+      let chuanHoa = str.trim().replace(/\+s/g, ' ');
+      let words = chuanHoa.split(' ');
+      return words.reduce((tu, max) => tu.length > max.length ? tu : max, ' ')
+    };
+
+    let input = "xiN  chAo caC bAN";
+    let chuanHoa = chuanHoaXau(input);
+    let timTu = timTuDaiNhat(chuanHoa);
+
+    console.log(chuanHoa);
+    console.log(timTu);
+  </script>
+</body>
+
+</html>
