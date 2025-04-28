@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bai 4</title>
+</head>
+
+<body>
+  <h1>Customer Manage</h1>
+  <button onclick="addCustomer()">Thêm mới khách hàng</button>
+  <p id="display"></p>
+  <script>
+    class Customer {
+      constructor(maKhachHang, tenKhachHang, soDienThoai, diaChi, email) {
+        this.maKhachHang = maKhachHang;
+        this.tenKhachHang = tenKhachHang;
+        this.soDienThoai = soDienThoai;
+        this.diaChi = diaChi;
+        this.email = email;
+      }
+    }
+    let customerList = [
+    ];
+    display();
+
+    function display() {
+      let tableString = `<table border = "1" style="border-collapse:  collapse">
+      <tr>
+        <th>Mã khách hàng</th>
+        <th>Tên khách hàng</th>
+        <th>Số điện thoại</th>
+        <th>Địa chỉ</th>
+        <th>Email</th>
+      </tr>`;
+      for (let i = 0; i < customerList.length; i++) {
+        tableString += ` <tr>
+          <td>${customerList[i].maKhachHang}</td>
+          <td>${customerList[i].tenKhachHang}</td>
+          <td>${customerList[i].soDienThoai}</td>
+          <td>${customerList[i].diaChi}</td>
+          <td>${customerList[i].email}</td>
+          </tr>
+        `
+      };
+      document.getElementById("display").innerHTML = tableString;
+    }
+
+    function addCustomer() {
+      let maKhachHang = prompt("Nhập mã khách hàng");
+      let tenKhachHang = prompt("Nhập tên khách hàng");
+      let soDienThoai = prompt("Nhập số điện thoại");
+      let diaChi = prompt("Nhập địa chỉ");
+      let email = prompt("Nhập email");
+
+      if (maKhachHang != "" && tenKhachHang != "" && soDienThoai != "" && diaChi != "" && email != "") {
+        let newCustomer = new Customer(maKhachHang, tenKhachHang, soDienThoai, diaChi, email);
+
+        customerList.push(newCustomer);
+        onload = () => {
+          document.getElementById("maKhachHang").value = "";
+          document.getElementById("tenKhachHang").value = "";
+          document.getElementById("soDienThoai").value = "";
+          document.getElementById("diaChi").value = "";
+          document.getElementById("email").value = "";
+        }
+      } else {
+        alert("Chưa đầy đủ thông tin");
+      };
+      display();
+    }
+
+  </script>
+</body>
+
+</html>

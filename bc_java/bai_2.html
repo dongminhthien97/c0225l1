@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>bai 2</title>
+</head>
+
+<body>
+  <script>
+    function lamTronDiem(diem) {
+      if (diem < 50) {
+        return diem + "Khong dat";
+      }
+      let boiTiepTheo = Math.ceil(diem / 5);
+      if (boiTiepTheo - diem < 3) {
+        return boiTiepTheo * 5;
+      } else {
+        return diem;
+      }
+    }
+    console.log(lamTronDiem(78));
+
+  </script>
+</body>
+
+</html>
