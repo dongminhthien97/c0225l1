@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    const chuoiNhap = prompt("Nhập một chuỗi:");
+
+    const cacTu = chuoiNhap.trim().split(/\s+/);
+
+    const soTu = chuoiNhap.trim() === '' ? 0 : cacTu.length;
+
+    // In kết quả ra console
+    console.log("Số từ trong chuỗi là:", soTu);
+  </script>
+</body>
+
+</html>

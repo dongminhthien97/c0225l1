@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <script>
+    function commonCharacterCount(str1, str2) {
+      let set1 = new Set(str1);
+      let set2 = new Set(str2);
+      let commonChar = [];
+
+      set1.forEach(char => {
+        if (set2.has(char)) {
+          commonChar.push(char);
+        }
+      });
+
+      return commonChar;
+    }
+
+    let s1 = "aabcc";
+    let s2 = "adcaa";
+
+    console.log(commonCharacterCount(s1, s2));
+
+  </script>
+</body>
+
+</html>

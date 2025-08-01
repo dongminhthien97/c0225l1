@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"path": "../../.."
+		},
+		{
+			"path": "../../../s11_vong_lap"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "module11"
+	}
+}

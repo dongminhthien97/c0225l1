@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <button onclick="addStudent()">Thêm mới học viên</button>
+  <button onclick="adjustStudent()">Sửa thông tin học viên</button>
+  <button onclick="deleteStudent()">Xoá học viên</button>
+  <p id="display"></p>
+  <script>
+    class Student {
+      constructor(mahocvien, ten, lop, email, ngaysinh) {
+        this.mahocvien = mahocvien;
+        this.ten = ten;
+        this.lop = lop;
+        this.email = email;
+        this.ngaysinh = ngaysinh;
+      }
+    }
+    let studentList = [
+      new Student("HV-0001", "Nguyễn Văn A", "C1022G1", "nguyenvana@gmail.com", "01/01/2004"),
+      new Student("HV-0002", "Nguyễn Văn B", "C1122G1", "nguyenvanb@gmail.com", "02/02/2004"),
+      new Student("HV-0003", "Nguyễn Thị C", "C1222G1", "nguyenthic@gmail.com", "03/03/2004"),
+    ];
+    display();
+
+    function display() {
+      let tableString = `<table border = "1" style="border-collapse:  collapse">
+      <tr>
+        <th>Mã học viên</th>
+        <th>Tên</th>
+        <th>Lớp</th>
+        <th>Email</th>
+        <th>Ngày sinh</th>
+      </tr>`;
+      for (let i = 0; i < studentList.length; i++) {
+        tableString += ` <tr>
+          <td>${studentList[i].mahocvien}</td>
+          <td>${studentList[i].ten}</td>
+          <td>${studentList[i].lop}</td>
+          <td>${studentList[i].email}</td>
+          <td>${studentList[i].ngaysinh}</td>
+          </tr>
+        `
+      };
+      document.getElementById("display").innerHTML = tableString;
+    }
+
+
+    function addStudent() {
+      let mahocvien = prompt("Nhập mã học viên");
+      let ten = prompt("Nhập tên");
+      let lop = prompt("Nhập lớp");
+      let email = prompt("Nhập email");
+      let ngaysinh = prompt("Nhập ngày sinh");
+
+      if (mahocvien != "" && ten != "" && lop != "" && email != "" && ngaysinh != "") {
+        let newStudent = new Student(mahocvien, ten, lop, email, ngaysinh);
+
+        studentList.push(newStudent);
+        onload = () => {
+          document.getElementById("mahocvien").value = "";
+          document.getElementById("ten").value = "";
+          document.getElementById("lop").value = "";
+          document.getElementById("email").value = "";
+          document.getElementById("ngaysinh").value = "";
+        }
+      } else {
+        alert("Chưa đầy đủ thông tin");
+      };
+      display();
+    }
+    function adjustStudent() {
+      function editStudent(index) {
+        const updatedName = prompt("Nhập tên học viên mới:", students[index].name);
+        students[index].id = prompt("Nhập id mới:", students[index].class);
+        students[index].name = updatedName;
+        students[index].class = prompt("Nhập lớp mới:", students[index].class);
+        students[index].email = prompt("Nhập email mới:", students[index].email);
+        students[index].birthDate = prompt("Nhập ngày sinh mới (dd/mm/yyyy):", students[index].birthDate);
+        students[index].module = prompt("Nhập module mới:", students[index].module);
+        displayStudents();
+      }
+    }
+    function deleteStudent() {
+      let mahocvien = prompt("Nhập mã học viên muốn xoá");
+      for (let i = 0; i < studentList.length; i++) {
+        if (studentList[i].mahocvien == mahocvien) {
+          studentList.splice(i, 1);
+          break;
+        } else {
+          alert("Mã học viên không tồn tại");
+          break;
+        }
+      }
+      display();
+    }
+  </script>
+</body>
+
+</html>
