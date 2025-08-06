@@ -1,0 +1,68 @@
+/* Reset margin cho body */
+body {
+    margin: 0;
+    background: #f5f5f5;
+    font-family: Arial, sans-serif;
+}
+
+/* Navbar chỉnh màu chữ */
+.navbar .nav-link {
+    color: #aaa;
+    transition: 0.3s;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+    color: #fff;
+    background: #111;
+    border-radius: 4px;
+}
+
+/* Sidebar */
+.sidebar a {
+    color: #0073e6;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.sidebar a:hover {
+    text-decoration: underline;
+}
+
+/* Content box */
+.content {
+    box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    border-radius: 5px;
+}
+
+/* Ads box */
+.ad-box {
+    background: #eee;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 30px;
+    text-align: center;
+    font-weight: bold;
+    transition: transform 0.2s ease-in-out;
+}
+
+.ad-box:hover {
+    transform: scale(1.05);
+}
+
+/* Footer */
+footer {
+    font-size: 15px;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+    .sidebar {
+        margin-bottom: 15px;
+    }
+
+    .ad-box {
+        margin-bottom: 10px;
+    }
+}
