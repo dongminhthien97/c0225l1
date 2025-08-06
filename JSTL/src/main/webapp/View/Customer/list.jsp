@@ -7,8 +7,8 @@
 </head>
 <body>
 <div>
-    <h1>Danh sách khách hàng</h1>
-    <table class="table table-dark table-striped">
+    <h1 style="text-align: center">Danh sách khách hàng</h1>
+    <table class="table table-sm">
         <tr>
             <th>Tên</th>
             <th>Ngày sinh</th>
