@@ -1,0 +1,19 @@
+
+.head-link a,
+.list-group-item {
+    transition: 0.3s;
+}
+
+.head-link a:hover,
+.list-group-item:hover {
+    color: #0073e6 !important;
+    font-weight: bold;
+}
+
+body {
+    background: #f9f9f9;
+}
+
+.list-group-item img {
+    object-fit: cover;
+}

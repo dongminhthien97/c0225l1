@@ -29,13 +29,11 @@ body {
     text-decoration: underline;
 }
 
-/* Content box */
 .content {
     box-shadow: 0 0 8px rgba(0,0,0,0.1);
     border-radius: 5px;
 }
 
-/* Ads box */
 .ad-box {
     background: #eee;
     border: 1px solid #ddd;
@@ -50,13 +48,11 @@ body {
     transform: scale(1.05);
 }
 
-/* Footer */
 footer {
     font-size: 15px;
     letter-spacing: 0.5px;
 }
 
-/* Responsive tweaks */
 @media (max-width: 768px) {
     .sidebar {
         margin-bottom: 15px;
