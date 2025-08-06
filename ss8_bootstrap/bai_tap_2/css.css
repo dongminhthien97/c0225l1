@@ -1,0 +1,28 @@
+.hero {
+    background: url('https://cdn.wallpapersafari.com/37/72/Y5TtUi.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+}
+
+.hero h1 {
+    font-size: 3rem;
+    font-weight: bold;
+}
+
+.hero p {
+    font-size: 1.25rem;
+}
+
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+footer {
+    background: #f3f3f3;
+    padding: 30px 0;
+}
