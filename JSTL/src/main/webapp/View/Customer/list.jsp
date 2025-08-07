@@ -6,6 +6,13 @@
     <c:import url="../layout/library.jsp"/>
 </head>
 <body>
+<style>
+    img {
+        width: 80px;
+        height: auto;
+        border-radius: 6px;
+    }
+</style>
 <div>
     <h1 style="text-align: center">Danh sách khách hàng</h1>
     <table class="table table-sm">
@@ -15,16 +22,14 @@
             <th>Địa chỉ</th>
             <th>Ảnh</th>
         </tr>
-        <c:forEach var="customer" items="${customerList}" varStatus="status">
+        <c:forEach var="customer" items="${customerList}">
             <tr>
                 <td><c:out value="${customer.getName()}"></c:out></td>
                 <td>
                     <c:out value="${customer.getDateOfBirth()}"></c:out>
                 </td>
                 <td><c:out value="${customer.getAddress()}"></c:out></td>
-                <td>
-                    <img src="https://play.google.com/store/apps/details?id=com.google.android.apps.photos"/>
-                </td>
+                <td><img src="${pageContext.request.contextPath}/${customer.image}" alt="Ảnh khách hàng"></td>
             </tr>
         </c:forEach>
     </table>
