@@ -8,6 +8,7 @@ public interface IProductService {
     List<Product> findAll();
     boolean addProduct(Product product);
     Product findById(int id);
-    void update(Product product);
-    boolean removeById(int id);
+    boolean update(Product product);
+    boolean deleteById(int id);
+    List<Product> searchByName(String keyword);
 }

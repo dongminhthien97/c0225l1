@@ -9,8 +9,6 @@
 <div>
     <form action="/products?action=add" method="post">
         <h1>Add new product to list</h1>
-        <label>ID</label>
-        <input name="id" placeholder="Enter id"><br>
         <label>Name</label>
         <input name="name" placeholder="Enter name"><br>
         <label>Price</label>

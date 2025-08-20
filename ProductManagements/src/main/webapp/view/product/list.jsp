@@ -8,6 +8,12 @@
 <body>
 <div>
     <h1>Product List</h1>
+    <form action="${pageContext.request.contextPath}/products" method="post" class="mb-3">
+        <input type="hidden" name="action" value="search">
+        <input type="text" name="keyword" placeholder="Enter product name">
+        <button type="submit">Search</button>
+    </form>
+
     <p style="color:green;">${param.mess}</p>
 
     <!-- Hiển thị thông báo lỗi nếu có -->
@@ -31,9 +37,12 @@
                 <td><c:out value="${product.description}"/></td>
                 <td><c:out value="${product.manufacturer}"/></td>
                 <td>
-                    <a href="${pageContext.request.contextPath}/products?action=edit&id=${product.id}">Edit</a> |
-                    <a href="${pageContext.request.contextPath}/products?action=delete&id=${product.id}"
-                       onclick="return confirm('Delete this product?');">Delete</a>
+                    <a href="products?action=edit&id=${product.id}">Edit</a> |
+                    <a href="products?action=view&id=${product.id}">View</a> |
+                    <a href="products?action=delete&id=${product.id}"
+                       onclick="return confirm('Are you sure to delete this product?')">
+                        Delete
+                    </a>
                 </td>
             </tr>
         </c:forEach>
@@ -41,6 +50,7 @@
 
     <br>
     <a href="${pageContext.request.contextPath}/products?action=add">Add new product</a><br><br>
+    <a href="/products">Back to List</a>
     </form>
 </div>
 </body>

@@ -31,58 +31,47 @@ public class ProductManagementServlet extends HttpServlet {
             case "edit":
                 showEditForm(req, resp);
                 break;
-                case "remove":
+            case "delete":
                 deleteProduct(req,resp);
+                break;
+            case"view":
+                viewProduct(req,resp);
                 break;
             default:
                 ShowList(req, resp);
         }
     }
 
+    private void viewProduct(HttpServletRequest req, HttpServletResponse resp) {
+        int id = Integer.parseInt(req.getParameter("id"));
+        Product product = productService.findById(id);
+        req.setAttribute("product", product);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("view/product/view.jsp");
+        try {
+            dispatcher.forward(req, resp);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void deleteProduct(HttpServletRequest req, HttpServletResponse resp) {
-        String idStr = req.getParameter("id");
-
-        if (idStr != null && !idStr.isEmpty()) {
-            int id = Integer.parseInt(idStr);
-            boolean removed = productService.removeById(id);
-
-            if (removed) {
-                try {
-                    resp.sendRedirect(req.getContextPath() + "/products?action=list&mess=Deleted+successfully");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            } else {
-                try {
-                    resp.sendRedirect(req.getContextPath() + "/products?action=list&mess=Product+not+found");
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        } else {
-            try {
-                resp.sendRedirect(req.getContextPath() + "/products?action=list&mess=Invalid+ID");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
+        int id = Integer.parseInt(req.getParameter("id"));
+        productService.deleteById(id);
+        try {
+            resp.sendRedirect("/products");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
 
     private void showEditForm(HttpServletRequest req, HttpServletResponse resp) {
-        String idStr = req.getParameter("id");
-        if (idStr == null || idStr.isEmpty()) {
-            try {
-                resp.sendRedirect(req.getContextPath() + "/products");
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-            return;
-        }
-        int id = Integer.parseInt(idStr);
+        int id = Integer.parseInt(req.getParameter("id"));
         Product existingProduct = productService.findById(id);
         req.setAttribute("product", existingProduct);
-        RequestDispatcher dispatcher = req.getRequestDispatcher("view/product/edit.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/view/product/edit.jsp");
         try {
             dispatcher.forward(req, resp);
         } catch (ServletException e) {
@@ -92,7 +81,6 @@ public class ProductManagementServlet extends HttpServlet {
         }
 
     }
-
 
     private void ShowList(HttpServletRequest req, HttpServletResponse resp) {
         List<Product> productList = productService.findAll();
@@ -129,18 +117,32 @@ public class ProductManagementServlet extends HttpServlet {
             case "edit":
                 update(req,resp);
                 break;
-
+            case "search":
+                search(req,resp);
+                break;
                 default:
         }
     }
 
+    private void search(HttpServletRequest req, HttpServletResponse resp) {
+        List<Product> productList = productService.searchByName(req.getParameter("keyword"));
+        req.setAttribute("productList", productList);
+        RequestDispatcher dispatcher = req.getRequestDispatcher("view/product/list.jsp");
+        try {
+            dispatcher.forward(req, resp);
+        } catch (ServletException e) {
+            throw new RuntimeException(e);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
     private void save(HttpServletRequest req, HttpServletResponse resp) {
-        int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
         double price = Double.parseDouble(req.getParameter("price"));
         String description = req.getParameter("description");
         String manufacturer = req.getParameter("manufacturer");
-        Product product = new Product(id, name, price, description, manufacturer);
+        Product product = new Product(name, price, description, manufacturer);
         boolean isAddSuccess = productService.addProduct(product);
         String mess = "";
         if (isAddSuccess){
@@ -156,16 +158,15 @@ public class ProductManagementServlet extends HttpServlet {
     }
 
     private void update(HttpServletRequest req, HttpServletResponse resp) {
-        int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("name");
         double price = Double.parseDouble(req.getParameter("price"));
         String description = req.getParameter("description");
         String manufacturer = req.getParameter("manufacturer");
 
-        Product product = new Product(id, name, price, description, manufacturer);
+        Product product = new Product(name, price, description, manufacturer);
         productService.update(product);
         try {
-            resp.sendRedirect(req.getContextPath() + "/products");
+            resp.sendRedirect("/products");
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
