@@ -11,4 +11,6 @@ public interface IProductRepository {
     boolean update(Product product);
     boolean deleteById(int id);
     List<Product> searchByName(String keyword);
+    List<Product> getProductsByPage(int page, int pageSize);
+    int getTotalProducts();
 }

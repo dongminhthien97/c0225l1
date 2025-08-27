@@ -1,6 +1,8 @@
 package com.example.productmanagements.controller;
 
+import com.example.productmanagements.enity.Category;
 import com.example.productmanagements.enity.Product;
+import com.example.productmanagements.service.CategoryService;
 import com.example.productmanagements.service.ProductService;
 
 import javax.servlet.RequestDispatcher;
@@ -17,6 +19,7 @@ import java.util.List;
 public class ProductManagementServlet extends HttpServlet {
 
     private ProductService productService = new ProductService();
+    private CategoryService categoryService = new CategoryService();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -32,10 +35,10 @@ public class ProductManagementServlet extends HttpServlet {
                 showEditForm(req, resp);
                 break;
             case "delete":
-                deleteProduct(req,resp);
+                deleteProduct(req, resp);
                 break;
-            case"view":
-                viewProduct(req,resp);
+            case "view":
+                viewProduct(req, resp);
                 break;
             default:
                 ShowList(req, resp);
@@ -83,8 +86,24 @@ public class ProductManagementServlet extends HttpServlet {
     }
 
     private void ShowList(HttpServletRequest req, HttpServletResponse resp) {
-        List<Product> productList = productService.findAll();
-        req.setAttribute("productList", productList);
+        int page = 1;
+        int pageSize = 3;
+
+        String pageParam = req.getParameter("page");
+        if (pageParam != null) {
+            try {
+                page = Integer.parseInt(pageParam);
+            } catch (NumberFormatException ignored) {
+            }
+        }
+
+        List<Product> products = productService.getProductsByPage(page, pageSize);
+        int totalPages = productService.getTotalPages(pageSize);
+
+        req.setAttribute("products", products);
+        req.setAttribute("currentPage", page);
+        req.setAttribute("totalPages", totalPages);
+
         try {
             req.getRequestDispatcher("/view/product/list.jsp").forward(req, resp);
         } catch (ServletException e) {
@@ -95,6 +114,8 @@ public class ProductManagementServlet extends HttpServlet {
     }
 
     private void showFormAdd(HttpServletRequest req, HttpServletResponse resp) {
+        List<Category> categories = categoryService.findAll();
+        req.setAttribute("categories", categories);
         try {
             req.getRequestDispatcher("/view/product/add.jsp").forward(req, resp);
         } catch (ServletException e) {
@@ -142,7 +163,8 @@ public class ProductManagementServlet extends HttpServlet {
         double price = Double.parseDouble(req.getParameter("price"));
         String description = req.getParameter("description");
         String manufacturer = req.getParameter("manufacturer");
-        Product product = new Product(name, price, description, manufacturer);
+        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
+        Product product = new Product(name, price, description, manufacturer,categoryId);
         boolean isAddSuccess = productService.addProduct(product);
         String mess = "";
         if (isAddSuccess){

@@ -17,7 +17,16 @@
         <input name="description" placeholder="Enter description"><br>
         <label>Manufacturer</label>
         <input name="manufacturer" placeholder="Enter manufacturer"><br>
-        <button type="submit">Submit</button>
+        <label>Category:</label>
+        Category:
+        <select name="categoryId">
+            <c:forEach var="c" items="${categories}">
+                <option value="${c.id}">${c.name}</option>
+            </c:forEach>
+        </select><br>
+        </select>
+        <button type="submit">Save</button>
+        <a href="/products">Cancel</a>
     </form>
 </div>
 </body>

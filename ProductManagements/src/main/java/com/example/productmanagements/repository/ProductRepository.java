@@ -1,5 +1,6 @@
 package com.example.productmanagements.repository;
 
+import com.example.productmanagements.enity.Category;
 import com.example.productmanagements.enity.Product;
 
 import java.sql.Connection;
@@ -12,12 +13,30 @@ import java.util.List;
 
 public class ProductRepository implements IProductRepository {
 
-    private final String SELECT_ALL = "select * from products;";
-    private final String INSERT_INTO = "INSERT INTO products (name, price, description, manufacturer) VALUES (?,?,?,?);";
-    private final String UPDATE_PRODUCT = "UPDATE products SET name = ?, price = ?, description = ?, manufacturer = ? WHERE id = ?";
-    private final String DELETE_PRODUCT = "DELETE FROM products WHERE id = ?";
-    private final String FIND_BY_ID = "SELECT * FROM products WHERE id = ?";
-    private final String FIND_BY_NAME = "SELECT * FROM products WHERE name LIKE ?";
+    private final String SELECT_ALL = "SELECT p.id, p.name, p.price, p.description, p.manufacturer, \n" +
+            "                                        c.id as category_id, c.name as category_name  \n" +
+            "                                        FROM product p\n" +
+            "                                        JOIN category c ON p.category_id = c.id;";
+    private final String INSERT_INTO = "INSERT INTO product(name, price, description, manufacturer, category_id) VALUES (?, ?, ?, ?, ?)";
+    private final String UPDATE_PRODUCT = "UPDATE product SET name = ?, price = ?, description = ?, manufacturer = ?, category_id = ? WHERE id = ?";
+    private final String DELETE_PRODUCT = "DELETE FROM product WHERE id = ?";
+    private final String FIND_BY_ID = "SELECT p.id, p.name, p.price, p.description, p.manufacturer, " +
+            "c.id as category_id, c.name as category_name " +
+            "FROM product p " +
+            "JOIN category c ON p.category_id = c.id " +
+            "WHERE p.id = ?";
+    private final String FIND_BY_NAME = "SELECT p.id, p.name, p.price, p.description, p.manufacturer, " +
+            "c.id as category_id, c.name as category_name " +
+            "FROM product p " +
+            "JOIN category c ON p.category_id = c.id " +
+            "WHERE p.name LIKE ?";
+
+    private static final String SELECT_PRODUCTS_PAGING =
+            "SELECT p.id, p.name, p.price, p.description,p.manufacturer,c.id AS category_id, c.name AS category_name \n" +
+                    "                    FROM product p JOIN category c ON p.category_id = c.id \n" +
+                    "                    LIMIT ? OFFSET ?;";
+    private static final String COUNT_PRODUCTS =
+            "SELECT COUNT * FROM product";
     @Override
     public List<Product> findAll() {
         List<Product> productList = new ArrayList<>();
@@ -25,12 +44,18 @@ public class ProductRepository implements IProductRepository {
                 PreparedStatement preparedStatement = connection.prepareStatement(SELECT_ALL);
                 ResultSet resultSet = preparedStatement.executeQuery();
                 while (resultSet.next()) {
-                    int id = resultSet.getInt("id");
-                    String name = resultSet.getString("name");
-                    double price = resultSet.getDouble("price");
-                    String description = resultSet.getString("description");
-                    String manufacturer = resultSet.getString("manufacturer");
-                    Product product = new Product(id, name, price, description, manufacturer);
+                    Category category = new Category(
+                            resultSet.getInt("category_id"),
+                            resultSet.getString("category_name")
+                    );
+                    Product product = new Product(
+                            resultSet.getInt("id"),
+                            resultSet.getString("name"),
+                            resultSet.getDouble("price"),
+                            resultSet.getString("description"),
+                            resultSet.getString("manufacturer"),
+                            category
+                    );
                     productList.add(product);
                 }
             } catch (SQLException e) {
@@ -47,6 +72,7 @@ public class ProductRepository implements IProductRepository {
             preparedStatement.setDouble(2, product.getPrice());
             preparedStatement.setString(3, product.getDescription());
             preparedStatement.setString(4, product.getManufacturer());
+            preparedStatement.setInt(5, product.getCategory().getId());
             int effectRow = preparedStatement.executeUpdate();
             return effectRow==1;
         } catch (SQLException e) {
@@ -63,12 +89,17 @@ public class ProductRepository implements IProductRepository {
             preparedStatement.setInt(1, id);
             ResultSet resultSet = preparedStatement.executeQuery();
             if (resultSet.next()) {
+                Category category = new Category(
+                        resultSet.getInt("category_id"),
+                        resultSet.getString("category_name")
+                );
                 product = new Product(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
                         resultSet.getDouble("price"),
                         resultSet.getString("description"),
-                        resultSet.getString("manufacturer")
+                        resultSet.getString("manufacturer"),
+                        category
                 );
             }
 
@@ -90,6 +121,7 @@ public class ProductRepository implements IProductRepository {
             preparedStatement.setString(3, product.getDescription());
             preparedStatement.setString(4, product.getManufacturer());
             preparedStatement.setInt(5, product.getId());
+            preparedStatement.setInt(5, product.getCategory().getId());
 
             rowUpdated = preparedStatement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -120,6 +152,10 @@ public class ProductRepository implements IProductRepository {
 
             ResultSet resultSet = preparedStatement.executeQuery();
             while(resultSet.next()){
+                Category category = new Category(
+                        resultSet.getInt("category_id"),
+                        resultSet.getString("category_name")
+                );
                 Product product = new Product(
                         resultSet.getInt("id"),
                         resultSet.getString("name"),
@@ -133,5 +169,54 @@ public class ProductRepository implements IProductRepository {
             throw new RuntimeException(e);
         }
         return productList;
+    }
+
+    @Override
+    public List<Product> getProductsByPage(int page, int pageSize) {
+        List<Product> products = new ArrayList<>();
+        int offset = (page - 1) * pageSize;
+
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement ps = connection.prepareStatement(SELECT_PRODUCTS_PAGING)) {
+
+            ps.setInt(1, pageSize);
+            ps.setInt(2, offset);
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Category category = new Category(
+                        rs.getInt("category_id"),
+                        rs.getString("category_name")
+                );
+
+                Product product = new Product(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getDouble("price"),
+                        rs.getString("description"),
+                        rs.getString("manufacturer"),
+                        category
+                );
+                products.add(product);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    @Override
+    public int getTotalProducts() {
+        try (Connection connection = BaseRepository.getConnectDB();
+             PreparedStatement ps = connection.prepareStatement(COUNT_PRODUCTS)) {
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return 0;
     }
 }

@@ -39,4 +39,13 @@ public class ProductService implements IProductService {
         return productRepository.searchByName(keyword);
     }
 
+    public List<Product> getProductsByPage(int page, int pageSize) {
+        return productRepository.getProductsByPage(page, pageSize);
+    }
+
+    public int getTotalPages(int pageSize) {
+        int totalProducts = productRepository.getTotalProducts();
+        return (int) Math.ceil((double) totalProducts / pageSize);
+    }
+
 }
